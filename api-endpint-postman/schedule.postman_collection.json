@@ -1,0 +1,123 @@
+{
+	"info": {
+		"_postman_id": "ba9f5052-7750-43ec-9638-821fcf4d0fac",
+		"name": "schedule",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27170982",
+		"_collection_link": "https://www.postman.com/natnaell/workspace/schecdule-board-new/collection/27170982-ba9f5052-7750-43ec-9638-821fcf4d0fac?action=share&creator=27170982&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "createSchedule",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var date1 = new Date(\"2021\");",
+							"postman.setEnvironmentVariable(\"date1\", date1.toISOString());",
+							"var date2 = new Date(\"2021\");",
+							"postman.setEnvironmentVariable(\"date2\", date2.toISOString());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \"class\":\"6462403b95e10ed06736affd\",\n    \"course\":\"64627c74466c63b14b434c69\",\n    \"dayOfTheWeek\":[\"tuesday\",\"sunday\"],\n    \"startTime\":{\"tuesday\":\"2:30 am\",\"sunday\":\"3:30 am\"},\n    \"endTime\":{\"tuesday\":\"3:30 am\",\"sunday\":\"3:40 am\"}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/api/v1/schedules",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"schedules"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getOneSchedule",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "getAllSchedule",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/api/v1/schedules",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"schedules"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateSchedule",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/api/v1/schedules",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"schedules"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteSchedule",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/api/v1/schedules/6462cbdb2c3ac34175c6aa9a",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"schedules",
+						"6462cbdb2c3ac34175c6aa9a"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

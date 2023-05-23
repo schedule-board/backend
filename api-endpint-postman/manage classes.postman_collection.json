@@ -1,0 +1,141 @@
+{
+	"info": {
+		"_postman_id": "2aec3886-2907-4c59-a60b-713567170e58",
+		"name": "manage classes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27170982",
+		"_collection_link": "https://www.postman.com/natnaell/workspace/schecdule-board-new/collection/27170982-2aec3886-2907-4c59-a60b-713567170e58?action=share&creator=27170982&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "get courses of a school",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/api/v1/schools/646a2b183748bfedb7cb7819/courses",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"schools",
+						"646a2b183748bfedb7cb7819",
+						"courses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create class for a school",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"class_name\":\"section-2\",\n    \"courses\":[\"646b65164b0967d6a695e8ca\",\"646b6bc718bf8e4f27ed3eae\",\"646b6c0918bf8e4f27ed3ec8\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/api/v1/schools/646a2b183748bfedb7cb7819/classes",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"schools",
+						"646a2b183748bfedb7cb7819",
+						"classes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get A class of a School",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "get classes of a school",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "update class of a school",
+			"request": {
+				"method": "PATCH",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "delete class of a school",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/api/v1/schools/646a2b183748bfedb7cb7819/classes/646b6c6118bf8e4f27ed3edf",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"schools",
+						"646a2b183748bfedb7cb7819",
+						"classes",
+						"646b6c6118bf8e4f27ed3edf"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,121 @@
+{
+	"info": {
+		"_postman_id": "778c5348-2e38-4363-9d13-69898b91e4c5",
+		"name": "class",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27170982",
+		"_collection_link": "https://www.postman.com/natnaell/workspace/schecdule-board-new/collection/27170982-778c5348-2e38-4363-9d13-69898b91e4c5?action=share&creator=27170982&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "createClass",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"section\":\"section-2\",\n    \"school\":\"6462389f61f39359f395a15b\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/api/v1/classes",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"classes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getOneClass",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/api/v1/classes/646269ba8ee1e4343e496813",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"classes",
+						"646269ba8ee1e4343e496813"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllClass",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/api/v1/classes",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"classes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateClass",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/api/v1/classes",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"classes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteClass",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/api/v1/classes",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"classes"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

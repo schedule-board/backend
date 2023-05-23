@@ -1,0 +1,194 @@
+{
+	"info": {
+		"_postman_id": "cbf27d99-bdad-497d-a074-880c5b9d2327",
+		"name": "manage courses",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27170982",
+		"_collection_link": "https://www.postman.com/natnaell/workspace/schecdule-board-new/collection/27170982-cbf27d99-bdad-497d-a074-880c5b9d2327?action=share&creator=27170982&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "create course and Secdules for a school",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"course_name\":\"node is best\",\n   \"teacher\":\"646a290c7d695d093c096ac7\",\n   \"schedules\":[{\n       \"dayOfTheWeek\": \"monday\",\n        \"startTime\":\"2:20 pm\",\n        \"endTime\":\"4:20 pm\"\n   },{\n       \"dayOfTheWeek\": \"tuesday\",\n        \"startTime\":\"5:20 pm\",\n        \"endTime\":\"7:20 pm\"\n   },{\n       \"dayOfTheWeek\": \"friday\",\n        \"startTime\":\"7:20 am\",\n        \"endTime\":\"10:20 am\"\n   }\n   ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/api/v1/schools/646a2b183748bfedb7cb7819/courses",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"schools",
+						"646a2b183748bfedb7cb7819",
+						"courses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllTeacher of a school",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/api/v1/users?school=646a2b183748bfedb7cb7819",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"users"
+					],
+					"query": [
+						{
+							"key": "school",
+							"value": "646a2b183748bfedb7cb7819"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get a course and its schedules for school",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/api/v1/schools/646a20a3ac9aac6910b26d4a/courses/646a76d80688b6ab7a3914b0",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"schools",
+						"646a20a3ac9aac6910b26d4a",
+						"courses",
+						"646a76d80688b6ab7a3914b0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update course and its schedules for school",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"course_name\":\"js is best\",\n   \"teacher\":\"646a54569dc7c92f65ed9014\",\n   \"schedules\":[{\n       \"dayOfTheWeek\": \"tuesday\",\n        \"startTime\":\"1:20 pm\",\n        \"endTime\":\"2:20 pm\"\n   },{\n       \"dayOfTheWeek\": \"wednesday\",\n        \"startTime\":\"2:20 pm\",\n        \"endTime\":\"3:20 pm\"\n   },{\n       \"dayOfTheWeek\": \"sunday\",\n        \"startTime\":\"1:20 am\",\n        \"endTime\":\"6:20 am\"\n   }\n   ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/api/v1/schools/646a20a3ac9aac6910b26d4a/courses/646a76d80688b6ab7a3914b0",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"schools",
+						"646a20a3ac9aac6910b26d4a",
+						"courses",
+						"646a76d80688b6ab7a3914b0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete course and its schedules for a school",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/api/v1/schools/646a20a3ac9aac6910b26d4a/courses/646a606c53b19d6b8e5d2d59",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"schools",
+						"646a20a3ac9aac6910b26d4a",
+						"courses",
+						"646a606c53b19d6b8e5d2d59"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get courses of a school",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,120 @@
+{
+	"info": {
+		"_postman_id": "6b01e458-7464-415d-9b48-3619aac0cc73",
+		"name": "course",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27170982",
+		"_collection_link": "https://www.postman.com/natnaell/workspace/schecdule-board-new/collection/27170982-6b01e458-7464-415d-9b48-3619aac0cc73?action=share&creator=27170982&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "createCourse",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"courseTitle\": \"gography\",\n    \"courseCode\": \"01go0\",\n    \"creditHour\": \"2\",\n    \"ECTS\": \"6\",\n    \"school\":\"6462388461f39359f395a159\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/api/v1/courses",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"courses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getOneCourse",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/api/v1/courses646241e2092020a2f7699ef7",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"courses646241e2092020a2f7699ef7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllCourse",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/api/v1/courses",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"courses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateCourse",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/api/v1/courses",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"courses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteCourse",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/api/v1/courses",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"courses"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

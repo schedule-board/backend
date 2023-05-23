@@ -1,0 +1,286 @@
+{
+	"info": {
+		"_postman_id": "253fbb00-3218-4117-8429-d80d371ad13e",
+		"name": "landing page api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27170982",
+		"_collection_link": "https://www.postman.com/natnaell/workspace/schecdule-board-new/collection/27170982-253fbb00-3218-4117-8429-d80d371ad13e?action=share&creator=27170982&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "updateProfile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"password\":\"12345678\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/api/v1/users/646a20a1ac9aac6910b26d48",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"646a20a1ac9aac6910b26d48"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateSchool",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"schoolEmail\": \"heloow@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4000/api/v1/schools/64617d7c5babd9b33821b141",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"schools",
+						"64617d7c5babd9b33821b141"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete School",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/api/v1/schools/64617d7c5babd9b33821b141",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"schools",
+						"64617d7c5babd9b33821b141"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all Class to select for students",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "get all schedules for selected classes for students",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/api/v1/schedules?course=646b65164b0967d6a695e8ca&course=646b65164b0967d6a695e8ca&course=646b6bc718bf8e4f27ed3eae&course=646b6c0918bf8e4f27ed3ec8",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"schedules"
+					],
+					"query": [
+						{
+							"key": "course",
+							"value": "646b65164b0967d6a695e8ca"
+						},
+						{
+							"key": "course",
+							"value": "646b65164b0967d6a695e8ca"
+						},
+						{
+							"key": "course",
+							"value": "646b6bc718bf8e4f27ed3eae"
+						},
+						{
+							"key": "course",
+							"value": "646b6c0918bf8e4f27ed3ec8"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update schedule  for school",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/api/v1/schedules/646b8591489a592b2360f709",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"schedules",
+						"646b8591489a592b2360f709"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete schedule for school",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/api/v1/schedules/646b8591489a592b2360f709",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"schedules",
+						"646b8591489a592b2360f709"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get A  schedule",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "get all schedules for owner",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/api/v1/schedules?school=646a20a3ac9aac6910b26d4a",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"schedules"
+					],
+					"query": [
+						{
+							"key": "school",
+							"value": "646a20a3ac9aac6910b26d4a"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all schedules for teacher",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/api/v1/schedules?teacher=646a20a3ac9aac6910b26d4a",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"schedules"
+					],
+					"query": [
+						{
+							"key": "teacher",
+							"value": "646a20a3ac9aac6910b26d4a"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all schedules for coordinator",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/api/v1/schedules?school=646a20a3ac9aac6910b26d4a",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"schedules"
+					],
+					"query": [
+						{
+							"key": "school",
+							"value": "646a20a3ac9aac6910b26d4a"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

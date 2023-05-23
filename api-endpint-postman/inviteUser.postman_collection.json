@@ -1,0 +1,75 @@
+{
+	"info": {
+		"_postman_id": "fcfb22c2-43c2-48ac-9902-c269b19ce047",
+		"name": "inviteUser",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27170982",
+		"_collection_link": "https://www.postman.com/natnaell/workspace/schecdule-board-new/collection/27170982-fcfb22c2-43c2-48ac-9902-c269b19ce047?action=share&creator=27170982&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "inviteTeacher",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/api/v1/schools/646a20a3ac9aac6910b26d4a/inviteTeacher",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"schools",
+						"646a20a3ac9aac6910b26d4a",
+						"inviteTeacher"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "inviteCoordinator",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/api/v1/schools/646a2b183748bfedb7cb7819/inviteCoordinator",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"schools",
+						"646a2b183748bfedb7cb7819",
+						"inviteCoordinator"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
