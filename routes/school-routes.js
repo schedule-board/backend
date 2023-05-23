@@ -3,17 +3,39 @@ const schoolController = require("../controllers/school-controller");
 const courseRouter = require("../routes/course-routes");
 const classRouter = require("../routes/class-routes");
 const authController = require("../controllers/auth-controller");
+const inviteCode = require("../controllers/inviteCode-controller");
 
 const schoolRouter = express.Router();
 
-schoolRouter.use("/:schoolId/course", authController.protect, courseRouter);
-schoolRouter.use("/:schoolId/class", authController.protect, classRouter);
+schoolRouter.use(
+  "/:id/courses",
+  authController.protect,
+  authController.restrictTo("owner", "coordinator"),
+  courseRouter
+);
+
+schoolRouter.use(
+  "/:id/classes",
+  authController.protect,
+  authController.restrictTo("owner", "coordinator"),
+  classRouter
+);
+
 schoolRouter
-  .route("/:schoolId/approveAdmin/:userId")
-  .get(authController.protect, schoolController.approveAdminRequest);
+  .route("/:id/inviteTeacher")
+  .get(
+    authController.protect,
+    authController.restrictTo("owner"),
+    inviteCode.inviteViaCode("teacher")
+  );
+
 schoolRouter
-  .route("/adminrequest")
-  .post(authController.protect, schoolController.adminRequest);
+  .route("/:id/inviteCoordinator")
+  .get(
+    authController.protect,
+    authController.restrictTo("owner"),
+    inviteCode.inviteViaCode("coordinator")
+  );
 
 schoolRouter
   .route("/")
@@ -24,10 +46,18 @@ schoolRouter
   .route("/:id")
   .get(
     authController.protect,
-    authController.restrictTo("admin"),
+    authController.restrictTo("owner", "coordinator"),
     schoolController.getOneSchool
   )
-  .patch(schoolController.updateSchool)
-  .delete(schoolController.deleteSchool);
+  .patch(
+    authController.protect,
+    authController.restrictTo("owner"),
+    schoolController.updateSchool
+  )
+  .delete(
+    authController.protect,
+    authController.restrictTo("owner"),
+    schoolController.deleteSchool
+  );
 
 module.exports = schoolRouter;

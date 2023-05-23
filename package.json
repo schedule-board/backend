@@ -17,6 +17,7 @@
     "mongoose": "^7.1.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.22",
+    "shortid": "^2.2.16",
     "utils": "^0.3.1",
     "validator": "^13.9.0"
   }

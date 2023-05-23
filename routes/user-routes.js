@@ -1,6 +1,6 @@
 const express = require("express");
 const userController = require("../controllers/user-controllers");
-const authController = require("../controllers/authNew-controller");
+const authController = require("../controllers/auth-controller");
 const userRouter = express.Router();
 
 userRouter.route("/signupAsOwner").post(authController.signupOwner);
@@ -16,7 +16,7 @@ userRouter
 userRouter
   .route("/:id")
   .get(userController.getOneUser)
-  .patch(userController.updateUser)
+  .patch(authController.protect, userController.updateUser)
   .delete(userController.deleteUser);
 
 module.exports = userRouter;

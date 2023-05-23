@@ -4,47 +4,42 @@ const AppError = require("../utils/app-error");
 
 const courseSchema = new mongoose.Schema(
   {
-    courseTitle: {
+    course_name: {
       type: String,
-      required: [true, "A course must have a title"],
-    },
-    courseCode: {
-      type: String,
-      required: [true, "A course must have a code"],
-    },
-    creditHour: {
-      type: Number,
-      min: [1, "A credit hour must be greater than 0, you got {VALUE}"],
-      max: [5, "A credit hour must be less than 6, you got {VALUE}"],
-      required: [true, "A course must have a credit hour"],
-    },
-    ECTS: {
-      type: Number,
-      min: [1, "A Ects must be greater than 0, you got {VALUE}"],
-      max: [9, "A Ects must be less than 6, you got {VALUE}"],
-      required: [true, "A course must have a ECTs"],
+      required: [true, "A course must have a name"],
     },
     school: {
       type: mongoose.Schema.ObjectId,
       ref: "School",
       required: [true, "a Course must have a school"],
     },
+    teacher: {
+      type: mongoose.Schema.ObjectId,
+      ref: "User",
+      required: [true, "a Course must have a teacher"],
+    },
   },
   { toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
 
+courseSchema.virtual("schedules", {
+  ref: "Schedule",
+  foreignField: "course",
+  localField: "_id",
+});
+
 courseSchema.pre("findOne", function (next) {
-  this.populate("school");
+  this.populate("school").populate("teacher").populate("schedules");
   next();
 });
 
 courseSchema.pre("save", async function (next) {
   const school = await School.findOne({ _id: this.school });
-  const isDuplicate = school.courses.some(
-    (cr) => cr.courseCode === this.courseCode
-  );
+  const isDuplicate = school.courses.some((cr) => {
+    return cr.course_name === this.course_name && cr.id !== this.id;
+  });
   if (isDuplicate) {
-    return next(new AppError("course code already used", 400));
+    return next(new AppError("course name already used", 400));
   }
 });
 

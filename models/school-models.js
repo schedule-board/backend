@@ -21,22 +21,22 @@ const schoolSchema = new mongoose.Schema(
   { toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
 
-// schoolSchema.virtual("classes", {
-//   ref: "Class",
-//   foreignField: "school",
-//   localField: "_id",
-// });
+schoolSchema.virtual("classes", {
+  ref: "Class",
+  foreignField: "school",
+  localField: "_id",
+});
 
-// schoolSchema.virtual("courses", {
-//   ref: "Course",
-//   foreignField: "school",
-//   localField: "_id",
-// });
+schoolSchema.virtual("courses", {
+  ref: "Course",
+  foreignField: "school",
+  localField: "_id",
+});
 
-// schoolSchema.pre("findOne", function (next) {
-//   this.populate({ path: "courses" }).populate({ path: "classes" });
-//   next();
-// });
+schoolSchema.pre("findOne", function (next) {
+  this.populate({ path: "courses" }).populate({ path: "classes" });
+  next();
+});
 
 const School = mongoose.model("School", schoolSchema);
 

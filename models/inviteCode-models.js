@@ -1,8 +1,8 @@
 const { default: mongoose } = require("mongoose");
-const School = require("../models/school-models");
+const School = require("./school-models");
 const AppError = require("../utils/app-error");
 
-const codeSchema = new mongoose.Schema(
+const inviteCodeSchema = new mongoose.Schema(
   {
     code: {
       type: String,
@@ -21,6 +21,9 @@ const codeSchema = new mongoose.Schema(
       },
       required: [true, "joinCode must have a role"],
     },
+    expireDate: Date,
   },
   { toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
+
+module.exports = mongoose.model("InviteCode", inviteCodeSchema);

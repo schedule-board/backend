@@ -1,10 +1,6 @@
 const express = require("express");
 const ClassController = require("../controllers/class-controller");
 const classRouter = express.Router({ mergeParams: true });
-const scheduleRouter = require("../routes/schedule-routes");
-const authController = require("../controllers/auth-controller");
-
-classRouter.use("/:classId/schedule", authController.protect, scheduleRouter);
 
 classRouter
   .route("/")
@@ -12,7 +8,7 @@ classRouter
   .post(ClassController.createClass);
 
 classRouter
-  .route("/:id")
+  .route("/:id2")
   .get(ClassController.getOneClass)
   .patch(ClassController.updateClass)
   .delete(ClassController.deleteClass);

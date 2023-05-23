@@ -28,10 +28,16 @@ exports.getOne = (model) =>
 exports.update = (model) =>
   catchAsync(async (req, res, next) => {
     const docId = req.params.id;
-    const doc = await model.findByIdAndUpdate(docId, req.body, {
-      runValidators: true,
-      new: true,
-    });
+    const doc = await model.findById(docId);
+
+    for (let key in doc) {
+      if (req.body[key]) {
+        doc[key] = req.body[key];
+      }
+    }
+
+    await doc.save();
+
     if (!doc) {
       return next(new AppError("Document not found!", 404));
     }

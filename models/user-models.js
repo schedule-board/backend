@@ -26,21 +26,14 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
+    select: false,
     minLength: [8, "password should contain at least 8 characters"],
     required: [true, "A user must have password"],
   },
-  schools: [
-    {
-      type: mongoose.Schema.ObjectId,
-      ref: "School",
-    },
-  ],
-  classes: [
-    {
-      type: mongoose.Schema.ObjectId,
-      ref: "Class",
-    },
-  ],
+  school: {
+    type: mongoose.Schema.ObjectId,
+    ref: "School",
+  },
 });
 
 userSchema.methods.isCorrectPassword = async function (
@@ -49,6 +42,11 @@ userSchema.methods.isCorrectPassword = async function (
 ) {
   return await bcrypt.compare(cadidatePassword, userPassword);
 };
+
+userSchema.pre("findOne", function (next) {
+  this.populate("school");
+  next();
+});
 
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
