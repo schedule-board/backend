@@ -7,12 +7,7 @@ const inviteCode = require("../controllers/inviteCode-controller");
 
 const schoolRouter = express.Router();
 
-schoolRouter.use(
-  "/:id/courses",
-  authController.protect,
-  authController.restrictTo("owner", "coordinator"),
-  courseRouter
-);
+schoolRouter.use("/:id/courses", courseRouter);
 
 schoolRouter.use(
   "/:id/classes",

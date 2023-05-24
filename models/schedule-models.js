@@ -17,6 +17,10 @@ const scheduleSchema = new mongoose.Schema(
       ref: "School",
       required: [true, "Schedule must have a course"],
     },
+    class: {
+      type: mongoose.Schema.ObjectId,
+      ref: "Class",
+    },
     teacher: {
       type: mongoose.Schema.ObjectId,
       ref: "User",
@@ -59,10 +63,16 @@ const scheduleSchema = new mongoose.Schema(
   { toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
 
+scheduleSchema.pre("find", function (next) {
+  this.populate({ path: "teacher" }).populate({ path: "class" });
+  next();
+});
+
 scheduleSchema.pre("findOne", function (next) {
   this.populate({ path: "course" })
     .populate({ path: "school" })
-    .populate({ path: "teacher" });
+    .populate({ path: "teacher" })
+    .populate({ path: "class" });
   next();
 });
 

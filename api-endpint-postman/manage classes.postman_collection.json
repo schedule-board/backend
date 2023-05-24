@@ -83,8 +83,33 @@
 		{
 			"name": "get A class of a School",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/api/v1/schools/646a2b183748bfedb7cb7819/classes/646b682784c75b1e4ab3a1f6",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"schools",
+						"646a2b183748bfedb7cb7819",
+						"classes",
+						"646b682784c75b1e4ab3a1f6"
+					]
+				}
 			},
 			"response": []
 		},
@@ -92,7 +117,21 @@
 			"name": "get classes of a school",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/api/v1/schools/646a2b183748bfedb7cb7819/courses",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"schools",
+						"646a2b183748bfedb7cb7819",
+						"courses"
+					]
+				}
 			},
 			"response": []
 		},
@@ -100,7 +139,22 @@
 			"name": "update class of a school",
 			"request": {
 				"method": "PATCH",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/api/v1/schools/646a2b183748bfedb7cb7819/classes/646b682784c75b1e4ab3a1f6",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"v1",
+						"schools",
+						"646a2b183748bfedb7cb7819",
+						"classes",
+						"646b682784c75b1e4ab3a1f6"
+					]
+				}
 			},
 			"response": []
 		},

@@ -2,6 +2,8 @@ const Class = require("../models/class-models");
 const sendRes = require("../utils/send-response");
 const catchAsync = require("../utils/catch-async");
 const AppError = require("../utils/app-error");
+const { findById } = require("../models/school-models");
+const Schedule = require("../models/schedule-models");
 
 exports.createClass = catchAsync(async (req, res, next) => {
   if (!req.body.school) {
@@ -9,6 +11,20 @@ exports.createClass = catchAsync(async (req, res, next) => {
   }
 
   const doc = await Class.create(req.body);
+
+  try {
+    doc.courses.forEach(async function (id) {
+      const schedules = await Schedule.find({ course: id });
+      schedules.forEach(async function (schedule) {
+        schedule.class = doc.id;
+        await schedule.save();
+      });
+    });
+  } catch (err) {
+    await doc.deleteOne();
+    next(err);
+  }
+
   sendRes(res, 201, doc);
 });
 

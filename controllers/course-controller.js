@@ -33,15 +33,21 @@ exports.createCourseAndSchedules = catchAsync(async (req, res, next) => {
     teacher: req.body.teacher,
   });
 
-  const schedules = req.body.schedules.map(
-    async (schedule) =>
-      await Schedule.create({
-        course: newCourse.id,
-        school: req.params.id,
-        teacher: req.body.teacher,
-        ...schedule,
-      })
-  );
+  let schedules;
+  try {
+    schedules = req.body.schedules.map(
+      async (schedule) =>
+        await Schedule.create({
+          course: newCourse.id,
+          school: req.params.id,
+          teacher: req.body.teacher,
+          ...schedule,
+        })
+    );
+  } catch (err) {
+    await newCourse.deleteOne();
+    next(err);
+  }
 
   newCourse.schedules = await Promise.all(schedules);
 

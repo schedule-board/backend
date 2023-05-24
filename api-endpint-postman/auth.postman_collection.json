@@ -1,23 +1,20 @@
 {
 	"info": {
-		"_postman_id": "ba9f5052-7750-43ec-9638-821fcf4d0fac",
-		"name": "schedule",
+		"_postman_id": "70f209d1-49ae-4cba-93dc-eb0f27430192",
+		"name": "auth",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "27170982",
-		"_collection_link": "https://www.postman.com/natnaell/workspace/schecdule-board-new/collection/27170982-ba9f5052-7750-43ec-9638-821fcf4d0fac?action=share&creator=27170982&source=collection_link"
+		"_collection_link": "https://www.postman.com/natnaell/workspace/schecdule-board-new/collection/27170982-70f209d1-49ae-4cba-93dc-eb0f27430192?action=share&creator=27170982&source=collection_link"
 	},
 	"item": [
 		{
-			"name": "createSchedule",
+			"name": "signupAsOwner",
 			"event": [
 				{
-					"listen": "prerequest",
+					"listen": "test",
 					"script": {
 						"exec": [
-							"var date1 = new Date(\"2021\");",
-							"postman.setEnvironmentVariable(\"date1\", date1.toISOString());",
-							"var date2 = new Date(\"2021\");",
-							"postman.setEnvironmentVariable(\"date2\", date2.toISOString());"
+							"pm.environment.set(\"jwt\", pm.response.json().token);"
 						],
 						"type": "text/javascript"
 					}
@@ -28,7 +25,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{   \"class\":\"6462403b95e10ed06736affd\",\n    \"course\":\"64627c74466c63b14b434c69\",\n    \"dayOfTheWeek\":[\"tuesday\",\"sunday\"],\n    \"startTime\":{\"tuesday\":\"2:30 am\",\"sunday\":\"3:30 am\"},\n    \"endTime\":{\"tuesday\":\"3:30 am\",\"sunday\":\"3:40 am\"}\n}",
+					"raw": "{\n    \"school_name\":\"oneline\",\n    \"school_email\":\"oneline@gmail.com\",\n    \"user_name\":\"foo\",\n    \"user_email\":\"foo@gmail.com\",\n    \"password\":\"12345678\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -36,7 +33,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:4000/api/v1/schedules",
+					"raw": "localhost:4000/api/v1/users/signupAsOwner",
 					"host": [
 						"localhost"
 					],
@@ -44,27 +41,40 @@
 					"path": [
 						"api",
 						"v1",
-						"schedules"
+						"users",
+						"signupAsOwner"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "getOneSchedule",
+			"name": "signupAsStudent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"jwt\", pm.response.json().token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
-				"method": "GET",
-				"header": []
-			},
-			"response": []
-		},
-		{
-			"name": "getAllSchedule",
-			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_name\":\"goog\",\n    \"user_email\":\"goog@gmail.com\",\n    \"password\":\"12345678\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "localhost:4000/api/v1/schedules",
+					"raw": "localhost:4000/api/v1/users/signupAsStudent",
 					"host": [
 						"localhost"
 					],
@@ -72,19 +82,40 @@
 					"path": [
 						"api",
 						"v1",
-						"schedules"
+						"users",
+						"signupAsStudent"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "updateSchedule",
+			"name": "signupWithCode",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"jwt\", pm.response.json().token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
-				"method": "PATCH",
+				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"code\": \"NC11c2Oue\",\n    \"user_name\": \"tea\",\n    \"password\":\"12345678\",\n    \"user_email\":\"tea@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "localhost:4000/api/v1/schedules",
+					"raw": "localhost:4000/api/v1/users/signupWithCode",
 					"host": [
 						"localhost"
 					],
@@ -92,19 +123,40 @@
 					"path": [
 						"api",
 						"v1",
-						"schedules"
+						"users",
+						"signupWithCode"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "deleteSchedule",
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"jwt\", pm.response.json().token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
-				"method": "DELETE",
+				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_email\": \"doo@gmail.com\",\n    \"password\": \"12345678\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "localhost:4000/api/v1/schedules/6462cbdb2c3ac34175c6aa9a",
+					"raw": "localhost:4000/api/v1/users/login",
 					"host": [
 						"localhost"
 					],
@@ -112,8 +164,8 @@
 					"path": [
 						"api",
 						"v1",
-						"schedules",
-						"6462cbdb2c3ac34175c6aa9a"
+						"users",
+						"login"
 					]
 				}
 			},

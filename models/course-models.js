@@ -28,6 +28,11 @@ courseSchema.virtual("schedules", {
   localField: "_id",
 });
 
+courseSchema.pre("find", function (next) {
+  this.populate("school").populate("teacher").populate("schedules");
+  next();
+});
+
 courseSchema.pre("findOne", function (next) {
   this.populate("school").populate("teacher").populate("schedules");
   next();
