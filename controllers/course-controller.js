@@ -33,21 +33,17 @@ exports.createCourseAndSchedules = catchAsync(async (req, res, next) => {
     teacher: req.body.teacher,
   });
 
-  let schedules;
-  try {
-    schedules = req.body.schedules.map(
-      async (schedule) =>
-        await Schedule.create({
-          course: newCourse.id,
-          school: req.params.id,
-          teacher: req.body.teacher,
-          ...schedule,
-        })
-    );
-  } catch (err) {
-    await newCourse.deleteOne();
-    next(err);
-  }
+  const schedules = req.body.schedules.map(
+    async (schedule) =>
+      await Schedule.create({
+        course: newCourse.id,
+        school: req.params.id,
+        teacher: req.body.teacher,
+        ...schedule,
+      })
+  );
+
+  console.log(schedules);
 
   newCourse.schedules = await Promise.all(schedules);
 
@@ -93,6 +89,7 @@ exports.updateCourseAndSchedules = catchAsync(async (req, res, next) => {
         course: course.id,
         school: course.school._id || course.school,
         teacher: course.teacher._id || course.teacher,
+        onUpdate: true,
         ...schedule,
       })
   );

@@ -45,13 +45,12 @@ const TokenExpiredErrorHandler = (err) =>
 module.exports = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
   err.status = err.status || "error";
-  if (process.env.NODE_ENV == "development") {
+  if (process.env.NODE_ENV === "development") {
     errSendToDev(res, err);
-  } else if (process.env.NODE_ENV == "production") {
+  } else if (process.env.NODE_ENV === "production") {
     let error = { ...err };
     if (err.isOperational) {
-      errSendToProd(res, error);
-      // if the id is not the correct mongodb id;
+      errSendToProd(res, err);
     } else if (err.name === "CastError") {
       error = CastErrorHandler(error);
       errSendToProd(res, error);

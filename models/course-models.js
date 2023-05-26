@@ -29,7 +29,7 @@ courseSchema.virtual("schedules", {
 });
 
 courseSchema.pre("find", function (next) {
-  this.populate("school").populate("teacher").populate("schedules");
+  this.populate("school");
   next();
 });
 

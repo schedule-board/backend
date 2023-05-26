@@ -10,7 +10,7 @@ const scheduleSchema = new mongoose.Schema(
     course: {
       type: mongoose.Schema.ObjectId,
       ref: "Course",
-      required: [true, "Schedule must have a course"],
+      // required: [true, "Schedule must have a course"],
     },
     school: {
       type: mongoose.Schema.ObjectId,
@@ -55,9 +55,13 @@ const scheduleSchema = new mongoose.Schema(
         },
         {
           validator: costomValidator.isvalidDuration,
-          message: "Invalid duration",
+          message: "invalid Duration",
         },
       ],
+    },
+    onUpdate: {
+      type: Boolean,
+      default: false,
     },
   },
   { toJSON: { virtuals: true }, toObject: { virtuals: true } }
@@ -78,14 +82,21 @@ scheduleSchema.pre("findOne", function (next) {
 
 scheduleSchema.pre("save", async function (next) {
   const course = await Course.findOne({ _id: this.course });
-  const isDuplicate = course.schedules.some(
-    (sc) =>
-      sc.id !== this.id &&
-      sc.day === this.day &&
-      sc.startTime === this.startTime
-  );
+  let isDuplicate = false;
+  if (course) {
+    isDuplicate = course.schedules.some(
+      (sc) =>
+        sc.id !== this.id &&
+        sc.day === this.day &&
+        sc.startTime === this.startTime
+    );
+  }
 
+  console.log(isDuplicate);
   if (isDuplicate) {
+    if (!this.onUpdate) {
+      await course.deleteOne();
+    }
     return next(new AppError("duplicate schedule"));
   }
 });
