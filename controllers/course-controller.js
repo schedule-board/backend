@@ -33,20 +33,29 @@ exports.createCourseAndSchedules = catchAsync(async (req, res, next) => {
     teacher: req.body.teacher,
   });
 
-  const schedules = req.body.schedules.map(
-    async (schedule) =>
-      await Schedule.create({
-        course: newCourse.id,
-        school: req.params.id,
-        teacher: req.body.teacher,
-        ...schedule,
-      })
-  );
+  // const schedules = req.body.schedules.map(
+  //   async (schedule) =>
+  //     await Schedule.create({
+  //       course: newCourse.id,
+  //       school: req.params.id,
+  //       teacher: req.body.teacher,
+  //       ...schedule,
+  //     })
+  // );
+  newCourse.schedules = [];
+  for (let se of req.body.schedules) {
+    console.log(se);
+    const sce = await Schedule.create({
+      course: newCourse.id,
+      school: req.params.id,
+      teacher: req.body.teacher,
+      ...se,
+    });
+    newCourse.schedules.push(sce._id);
+    await newCourse.save();
+  }
 
-  console.log(schedules);
-
-  newCourse.schedules = await Promise.all(schedules);
-
+  newCourse.schedules = undefined;
   res.status(201).json({
     status: "success",
     course: newCourse,

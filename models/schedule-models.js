@@ -83,6 +83,7 @@ scheduleSchema.pre("findOne", function (next) {
 scheduleSchema.pre("save", async function (next) {
   const course = await Course.findOne({ _id: this.course });
   let isDuplicate = false;
+
   if (course) {
     isDuplicate = course.schedules.some(
       (sc) =>
