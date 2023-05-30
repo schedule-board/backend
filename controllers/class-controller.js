@@ -9,21 +9,12 @@ exports.createClass = catchAsync(async (req, res, next) => {
   if (!req.body.school) {
     req.body.school = req.params.id;
   }
+  if (req.body.courses) {
+    const courseSet = new Set(req.body.courses);
+    req.body.courses = Array.from(courseSet);
+  }
 
   const doc = await Class.create(req.body);
-
-  try {
-    doc.courses.forEach(async function (id) {
-      const schedules = await Schedule.find({ course: id });
-      schedules.forEach(async function (schedule) {
-        schedule.class = doc.id;
-        await schedule.save();
-      });
-    });
-  } catch (err) {
-    await doc.deleteOne();
-    next(err);
-  }
 
   sendRes(res, 201, doc);
 });
@@ -46,6 +37,14 @@ exports.getOneClass = catchAsync(async (req, res, next) => {
 exports.updateClass = catchAsync(async (req, res, next) => {
   const docId = req.params.id2;
   const doc = await Class.findById(docId);
+  if (!doc) {
+    return next(new AppError("Document not found!", 404));
+  }
+
+  if (req.body.courses) {
+    const courseSet = new Set(req.body.courses);
+    req.body.courses = Array.from(courseSet);
+  }
 
   for (let key in doc) {
     if (req.body[key]) {
@@ -55,9 +54,6 @@ exports.updateClass = catchAsync(async (req, res, next) => {
 
   await doc.save();
 
-  if (!doc) {
-    return next(new AppError("Document not found!", 404));
-  }
   sendRes(res, 200, doc);
 });
 

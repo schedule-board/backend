@@ -25,16 +25,24 @@ const classSchema = new mongoose.Schema(
 
 classSchema.pre("save", async function (next) {
   const school = await School.findOne({ _id: this.school });
-  const isDuplicate = school.classes.some(
-    (cl) => cl.class_name === this.class_name
-  );
+  const isDuplicate = school.classes.some((cl) => {
+    return cl.id !== this.id && cl.class_name === this.class_name;
+  });
   if (isDuplicate) {
     return next(new AppError("Section name already used", 400));
   }
 });
 
+classSchema.pre("find", function (next) {
+  this.populate({ path: "school", select: "school_name" });
+  next();
+});
+
 classSchema.pre("findOne", function (next) {
-  this.populate({ path: "courses" }).populate("school");
+  this.populate({ path: "courses" }).populate({
+    path: "school",
+    select: "school_name",
+  });
   next();
 });
 

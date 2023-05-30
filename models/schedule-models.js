@@ -15,16 +15,12 @@ const scheduleSchema = new mongoose.Schema(
     school: {
       type: mongoose.Schema.ObjectId,
       ref: "School",
-      required: [true, "Schedule must have a course"],
-    },
-    class: {
-      type: mongoose.Schema.ObjectId,
-      ref: "Class",
+      required: [true, "Schedule must have a school"],
     },
     teacher: {
       type: mongoose.Schema.ObjectId,
       ref: "User",
-      required: [true, "Schedule must have a course"],
+      required: [true, "Schedule must have a teacher"],
     },
     dayOfTheWeek: {
       type: String,
@@ -68,7 +64,9 @@ const scheduleSchema = new mongoose.Schema(
 );
 
 scheduleSchema.pre("find", function (next) {
-  this.populate({ path: "teacher" }).populate({ path: "class" });
+  this.populate({ path: "teacher", select: "user_name" })
+    .populate({ path: "course", select: "course_name" })
+    .populate({ path: "school", select: "school_name" });
   next();
 });
 
@@ -88,7 +86,7 @@ scheduleSchema.pre("save", async function (next) {
     isDuplicate = course.schedules.some(
       (sc) =>
         sc.id !== this.id &&
-        sc.day === this.day &&
+        sc.dayOfTheWeek === this.dayOfTheWeek &&
         sc.startTime === this.startTime
     );
   }

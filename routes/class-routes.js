@@ -1,10 +1,11 @@
 const express = require("express");
 const ClassController = require("../controllers/class-controller");
 const classRouter = express.Router({ mergeParams: true });
+const authController = require("../controllers/auth-controller");
 
 classRouter
   .route("/")
-  .get(ClassController.getAllClass)
+  .get(authController.protect, ClassController.getAllClass)
   .post(ClassController.createClass);
 
 classRouter

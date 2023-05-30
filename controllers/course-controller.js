@@ -33,15 +33,6 @@ exports.createCourseAndSchedules = catchAsync(async (req, res, next) => {
     teacher: req.body.teacher,
   });
 
-  // const schedules = req.body.schedules.map(
-  //   async (schedule) =>
-  //     await Schedule.create({
-  //       course: newCourse.id,
-  //       school: req.params.id,
-  //       teacher: req.body.teacher,
-  //       ...schedule,
-  //     })
-  // );
   newCourse.schedules = [];
   for (let se of req.body.schedules) {
     console.log(se);
@@ -92,24 +83,26 @@ exports.updateCourseAndSchedules = catchAsync(async (req, res, next) => {
     await Schedule.findByIdAndDelete(schedule._id);
   }
 
-  const schedules = req.body.schedules.map(
-    async (schedule) =>
-      await Schedule.create({
-        course: course.id,
-        school: course.school._id || course.school,
-        teacher: course.teacher._id || course.teacher,
-        onUpdate: true,
-        ...schedule,
-      })
-  );
+  course.schedules = [];
+  for (let se of req.body.schedules) {
+    const sce = await Schedule.create({
+      course: course.id,
+      school: req.params.id,
+      teacher: req.body.teacher,
+      onUpdate: true,
+      ...se,
+    });
+    course.schedules.push(sce._id);
+    await course.save();
+  }
 
-  course.schedules = await Promise.all(schedules);
+  course.schedules = undefined;
 
-  const updatedCourse = await course.save();
+  console.log(course);
 
   res.status(200).json({
     status: "success",
-    updatedCourse,
+    course,
   });
 });
 

@@ -15,8 +15,8 @@ userRouter
 
 userRouter
   .route("/:id")
-  .get(userController.getOneUser)
+  .get(authController.protect, userController.getOneUser)
   .patch(authController.protect, userController.updateUser)
-  .delete(userController.deleteUser);
+  .delete(authController.protect, userController.deleteUser);
 
 module.exports = userRouter;
