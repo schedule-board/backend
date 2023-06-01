@@ -69,12 +69,13 @@ scheduleSchema.pre("find", function (next) {
     .populate({ path: "school", select: "school_name" });
   next();
 });
-
 scheduleSchema.pre("findOne", function (next) {
-  this.populate({ path: "course" })
-    .populate({ path: "school" })
-    .populate({ path: "teacher" })
-    .populate({ path: "class" });
+  this.populate({ path: "teacher", select: "user_name" })
+    .populate({
+      path: "school",
+      select: "school_name",
+    })
+    .populate({ path: "course", select: "course_name" });
   next();
 });
 
