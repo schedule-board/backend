@@ -13,14 +13,14 @@ dotENV.config({
 
 const app = require("./app");
 
-const dbUrl = process.env.MONGODB.replace(
-  "<password>",
-  process.env.MONGODB_PASSWORD
-);
+// const dbUrl = process.env.MONGODB.replace(
+//   "<password>",
+//   process.env.MONGODB_PASSWORD
+// );
 
-// const dbLocalUrl = process.env.MONGODB_LOCAL;
+const dbLocalUrl = process.env.MONGODB_LOCAL;
 
-const db = mongoose.connect(dbUrl);
+const db = mongoose.connect(dbLocalUrl);
 
 db.then(() => console.log("db connects Successfully"));
 
